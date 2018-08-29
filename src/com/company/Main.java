@@ -32,25 +32,28 @@ public class Main {
         int duur = Integer.parseInt(scanner.nextLine());
         Film film1 = new Film(titel, genre, regisseur, schrijver, release, duur);
         filmLijst.put(id, film1);
-        for (Film f : filmLijst.values()){
-            System.out.printf(" %s%n %s%n %s%n %s%n %s%n %d%n ", titel,genre,regisseur, schrijver,release,duur);
+        for (Film f : filmLijst.values()) {
+            System.out.printf(" Titel: %s%n Genre: %s%n Regisseur: %s, Schrijver: %s%n release: %s, Duur: %d min. %n ",
+                    titel, genre, regisseur, schrijver, release, duur);
         }
 
         System.out.println("Geef de beoordeling van de film in : ");
         int rating = Integer.parseInt(scanner.nextLine());
-        Rating rating1 = new Rating(rating);
         ratingLijst.add(new Rating(rating));
-        for (int i = 0; i < ratingLijst.size() ; i++) {
-            System.out.println(ratingLijst.get(rating));
+        for (int i = 0; i < ratingLijst.size(); i++) {
+            System.out.println("Rating: " + ratingLijst.get(i));
+
         }
 
-        System.out.println("Geef één van de acteurs in : ");
+        System.out.println("Geefvan één van de acteurs zijn voornaam : ");
         String naam = scanner.nextLine();
-        System.out.println("Geef het geslacht van die acteur in : ");
-        String geslachtAct = scanner.nextLine();
-        acteursLijst.add(new Acteur(geslachtAct,naam));
+        System.out.println("Geef de achternaam van dezelfde acteur in : ");
+        String achternaam = scanner.nextLine();
+        acteursLijst.add(new Acteur(naam, achternaam));
+        for (int i = 0; i < acteursLijst.size(); i++) {
+            System.out.println("Naam acteur: "+ acteursLijst.get(i));
 
 
-
+        }
     }
 }
