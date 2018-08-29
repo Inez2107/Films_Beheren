@@ -15,19 +15,18 @@ public class Main {
         System.out.println("Ingeven Films ");
         System.out.println("Geef de titel van de film in : ");
         String titel = scanner.nextLine();
-        System.out.println("Geef de regisseur in : ");
-        String regisseur = scanner.nextLine();
         System.out.println("Geef het genre van de film in : ");
         String genre  = scanner.nextLine();
+        System.out.println("Geef de regisseur in : ");
+        String regisseur = scanner.nextLine();
         System.out.println("Geef de schrijver van het script in : ");
         String schrijver = scanner.nextLine();
         System.out.println("Geef de release datum in :");
         LocalDate release = LocalDate.parse(scanner.nextLine());
         System.out.println("Geef de duur van de film in (MIN) : ");
         int duur = Integer.parseInt(scanner.nextLine());
-        new Film()
-
-
+        Film film1 = new Film(titel, genre, regisseur,schrijver, release,duur);
+        film1.toString();
 
         System.out.println("Geef de beoordeling van de film in : ");
         int rating = Integer.parseInt(scanner.nextLine());
