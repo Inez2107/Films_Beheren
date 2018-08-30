@@ -1,15 +1,14 @@
 package com.company;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
+    private static Scanner scanner;
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
         ArrayList<Film> filmLijst = new ArrayList<>();
         ArrayList<Acteur> acteursLijst = new ArrayList<>();
         ArrayList<Rating> ratingLijst = new ArrayList<>();
@@ -79,10 +78,72 @@ public class Main {
     }
 
     private static void toonFilms(ArrayList<Film> filmLijst) {
+        boolean isGestopt = false;
         for (Film f : filmLijst) {
             System.out.printf(" %n Titel: %s%n Genre: %s%n Regisseur: %s, Schrijver: %s%n release: %s, Duur: %d min. %n ",
                     f.getTitel(), f.getGenre(), f.getRegisseur(), f.getSchrijver(), f.getRelease(), f.getDuur());
+        }
+        while (!isGestopt) {
+            System.out.printf(" %n Wat wil je doen? Kies het bijhorende cijfer.");
+            System.out.printf(" 0. Stoppen %n 1. Wijzigen Films %n 2. Verwijderen Films %n ");
+            int keuze = Integer.parseInt(scanner.nextLine());
+            switch (keuze) {
+                case 0:
+                    isGestopt = true;
+                    break;
+                case 1:
+                    wijzigFilms(filmLijst);
+                    break;
+                case 2:
+                    verwijderFilms(filmLijst);
+                    break;
+            }
+       }
+            }
 
+    private static void wijzigFilms(ArrayList<Film> filmLijst) {
+        boolean isGestopt;
+        System.out.println("Wijzig Films");
+        System.out.println("Geef de titel van de film in : ");
+        String titel = scanner.nextLine();
+        Iterator<Film> iter = filmLijst.iterator();
+        while (iter.hasNext()) {
+            Film f = iter.next();
+            if (titel.equals(f.getTitel())){
+                System.out.println("Geef het element dat je wil veranderen: ");
+                String input = scanner.nextLine();
+                switch (input){
+                    case "stop":
+                        isGestopt = true;
+                        break;
+                    case "titel" :
+//                        do {
+//                            (Film f : filmLijst){
+//                                if (f.getTitel().equals(input)){
+//                                    filmLijst.add(f);
+//                                }
+//                            }
+                        } while (input.equals(titel)){
+                            iter.remove();
+                            filmLijst.add(f);
+
+                        }
+                }
+                }
+    }
+
+
+    private static void verwijderFilms(ArrayList<Film> filmLijst) {
+        System.out.println("Verwijder Films ");
+        System.out.println("Geef de titel van de film in : ");
+        String titel = scanner.nextLine();
+        Iterator<Film> iter = filmLijst.iterator();
+        while (iter.hasNext()) {
+            Film f = iter.next();
+            if (titel.equals(f.getTitel())){
+                iter.remove();
+                System.out.println("Film is verwijderdt!");
+            }
         }
     }
 }
