@@ -10,11 +10,36 @@ public class Film {
     private String release;
     private int duur;
 
-    public Film(String titel, String genre, String regisseur,String schrijver, String release, int duur) {
+    public void setTitel(String titel) {
+        this.titel = titel;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public void setRegisseur(String regisseur) {
+        this.regisseur = regisseur;
+    }
+
+    public void setSchrijver(String schrijver) {
+        this.schrijver = schrijver;
+    }
+
+    public void setRelease(String release) {
+        this.release = release;
+    }
+
+    public void setDuur(int duur) {
+        this.duur = duur;
+    }
+
+    public Film(String titel, String genre, String regisseur, String schrijver, String release, int duur) {
         this.titel = titel;
         this.genre = genre;
         this.regisseur = regisseur;
         this.schrijver = schrijver;
+
         this.release = release;
         this.duur = duur;
     }

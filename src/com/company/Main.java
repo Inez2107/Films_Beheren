@@ -12,7 +12,6 @@ public class Main {
         ArrayList<Film> filmLijst = new ArrayList<>();
         ArrayList<Acteur> acteursLijst = new ArrayList<>();
         ArrayList<Rating> ratingLijst = new ArrayList<>();
-        int id = 10;
 
         boolean isGestopt = false;
         while (!isGestopt) {
@@ -30,6 +29,8 @@ public class Main {
                     System.out.println("Opvragen Films");
                     toonFilms(filmLijst);
                     break;
+                default:
+                    System.out.printf("Geen geldig nummer. Geef één van de volgende opties in: %n");
             }
         }
     }
@@ -51,6 +52,7 @@ public class Main {
             String release = scanner.nextLine();
             System.out.println("Geef de duur van de film in (MIN) : ");
             int duur = Integer.parseInt(scanner.nextLine());
+
             Film film1 = new Film(titel, genre, regisseur, schrijver, release, duur);
             filmLijst.add(film1);
 
@@ -58,22 +60,6 @@ public class Main {
             System.out.println("Geef STOP in om te stoppen! ");
             System.out.println("Geef de titel van de film in : ");
             titel = scanner.nextLine();
-//                System.out.println("Geef de beoordeling van de film in : ");
-//                int rating = Integer.parseInt(scanner.nextLine());
-//                ratingLijst.add(new Rating(rating));
-//                for (int i = 0; i < ratingLijst.size(); i++) {
-//                    System.out.println("Rating: " + ratingLijst.get(i));
-//
-//                }
-//
-//                System.out.println("Geefvan één van de acteurs zijn voornaam : ");
-//                String naam = scanner.nextLine();
-//                System.out.println("Geef de achternaam van dezelfde acteur in : ");
-//                String achternaam = scanner.nextLine();
-//                acteursLijst.add(new Acteur(naam, achternaam));
-//                for (int i = 0; i < acteursLijst.size(); i++) {
-//                    System.out.println("Naam acteur: " + acteursLijst.get(i));
-//                }
         }
     }
 
@@ -85,7 +71,7 @@ public class Main {
         }
         while (!isGestopt) {
             System.out.printf(" %n Wat wil je doen? Kies het bijhorende cijfer.");
-            System.out.printf(" 0. Stoppen %n 1. Wijzigen Films %n 2. Verwijderen Films %n ");
+            System.out.printf(" %n 0. Stoppen %n 1. Wijzigen Films %n 2. Verwijderen Films %n 3. Bekijk films %n 4. Sorteer op onderdeel %n");
             int keuze = Integer.parseInt(scanner.nextLine());
             switch (keuze) {
                 case 0:
@@ -97,9 +83,60 @@ public class Main {
                 case 2:
                     verwijderFilms(filmLijst);
                     break;
+                case 3:
+                    for (Film f : filmLijst) {
+                        System.out.printf(" %n Titel: %s%n Genre: %s%n Regisseur: %s, Schrijver: %s%n release: %s, Duur: %d min. %n ",
+                                f.getTitel(), f.getGenre(), f.getRegisseur(), f.getSchrijver(), f.getRelease(), f.getDuur());
+                    }
+                    break;
+                case 4:
+                    sorteer(filmLijst);
+                    break;
+                default:
+                    System.out.printf("Geen geldig nummer. Geef één van de volgende opties in: %n");
             }
-       }
+        }
+    }
+
+    private static void sorteer(ArrayList<Film> filmLijst) {
+        boolean isGestopt;
+        System.out.printf("%n Van welk onderdeel wil je de inhoud zien? : ");
+        System.out.printf("%n Mogelijkheden: titel, genre, regisseur, schrijver, release, duur. %n");
+        String keuze = scanner.nextLine();
+        for (Film f : filmLijst) {
+            switch (keuze) {
+                case "stop":
+                    isGestopt = true;
+                    break;
+                case "titel":
+                    f.getTitel();
+                    System.out.println(f.getTitel());
+                    break;
+                case "genre":
+                    f.getGenre();
+                    System.out.println(f.getGenre());
+                    break;
+                case "regisseur":
+                    f.getRegisseur();
+                    System.out.println(f.getRegisseur());
+                    break;
+                case "schrijver":
+                    f.getSchrijver();
+                    System.out.println(f.getSchrijver());
+                    break;
+                case "release":
+                    f.getRelease();
+                    System.out.println(f.getRelease());
+                    break;
+                case "duur":
+                    f.getDuur();
+                    System.out.println(f.getDuur());
+                    break;
+                default:
+                    System.out.printf("Geen geldig nummer. Geef één van de volgende opties in: %n");
             }
+        }
+    }
 
     private static void wijzigFilms(ArrayList<Film> filmLijst) {
         boolean isGestopt;
@@ -109,27 +146,49 @@ public class Main {
         Iterator<Film> iter = filmLijst.iterator();
         while (iter.hasNext()) {
             Film f = iter.next();
-            if (titel.equals(f.getTitel())){
+            if (titel.equals(f.getTitel())) {
                 System.out.println("Geef het element dat je wil veranderen: ");
                 String input = scanner.nextLine();
-                switch (input){
+
+                switch (input) {
                     case "stop":
                         isGestopt = true;
                         break;
-                    case "titel" :
-//                        do {
-//                            (Film f : filmLijst){
-//                                if (f.getTitel().equals(input)){
-//                                    filmLijst.add(f);
-//                                }
-//                            }
-                        } while (input.equals(titel)){
-                            iter.remove();
-                            filmLijst.add(f);
-
-                        }
+                    case "titel":
+                        System.out.println("Geef de nieuwe input : ");
+                        String nieuweInput = scanner.nextLine();
+                        f.setTitel(nieuweInput);
+                        break;
+                    case "genre":
+                        System.out.println("Geef de nieuwe input : ");
+                        nieuweInput = scanner.nextLine();
+                        f.setGenre(nieuweInput);
+                        break;
+                    case "regisseur":
+                        System.out.println("Geef de nieuwe input : ");
+                        nieuweInput = scanner.nextLine();
+                        f.setRegisseur(nieuweInput);
+                        break;
+                    case "schrijver":
+                        System.out.println("Geef de nieuwe input : ");
+                        nieuweInput = scanner.nextLine();
+                        f.setSchrijver(nieuweInput);
+                        break;
+                    case "release":
+                        System.out.println("Geef de nieuwe input : ");
+                        nieuweInput = scanner.nextLine();
+                        f.setRelease(nieuweInput);
+                        break;
+                    case "duur":
+                        System.out.println("Geef de nieuwe input : ");
+                        int intNieuweInput = Integer.parseInt(scanner.nextLine());
+                        f.setDuur(intNieuweInput);
+                        break;
+                    default:
+                        System.out.printf("Geen geldig input. Geef één van de volgende opties in: %n");
                 }
-                }
+            }
+        }
     }
 
 
@@ -140,7 +199,7 @@ public class Main {
         Iterator<Film> iter = filmLijst.iterator();
         while (iter.hasNext()) {
             Film f = iter.next();
-            if (titel.equals(f.getTitel())){
+            if (titel.equals(f.getTitel())) {
                 iter.remove();
                 System.out.println("Film is verwijderdt!");
             }
