@@ -50,8 +50,18 @@ public class Main {
             String schrijver = scanner.nextLine();
             System.out.println("Geef de release datum in :");
             String release = scanner.nextLine();
-            System.out.println("Geef de duur van de film in (MIN) : ");
-            int duur = Integer.parseInt(scanner.nextLine());
+            int duur = 0;
+            boolean inputOkay = false;
+            do {
+                System.out.println("Geef de duur van de film in MINUTEN : ");
+                try {
+                    duur = Integer.parseInt(scanner.nextLine());
+                    inputOkay = true;
+                } catch (NumberFormatException fout) {
+                    System.out.printf("Verkeerde input. Gebruik enkel cijfers %n");
+                }
+            } while (!inputOkay);
+
 
             Film film1 = new Film(titel, genre, regisseur, schrijver, release, duur);
             filmLijst.add(film1);
@@ -71,7 +81,7 @@ public class Main {
         }
         while (!isGestopt) {
             System.out.printf(" %n Wat wil je doen? Kies het bijhorende cijfer.");
-            System.out.printf(" %n 0. Stoppen %n 1. Wijzigen Films %n 2. Verwijderen Films %n 3. Bekijk films %n 4. Sorteer op onderdeel %n");
+            System.out.printf(" %n 0. Teruggaan %n 1. Wijzigen Films %n 2. Verwijderen Films %n 3. Bekijk films %n 4. Sorteer op onderdeel %n");
             int keuze = Integer.parseInt(scanner.nextLine());
             switch (keuze) {
                 case 0:
@@ -140,6 +150,7 @@ public class Main {
 
     private static void wijzigFilms(ArrayList<Film> filmLijst) {
         boolean isGestopt;
+        boolean inputOkay = false;
         System.out.println("Wijzig Films");
         System.out.println("Geef de titel van de film in : ");
         String titel = scanner.nextLine();
